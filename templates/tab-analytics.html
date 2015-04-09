@@ -1,5 +1,5 @@
 <ion-view view-title="Analytics">
-  <ion-content class="padding">
+  <ion-content style="background: #aaa;" class="padding">
     <div class="list card">
       <div class="item item-avatar">
         <img src="img/analytics-pulse-header.png">
@@ -22,12 +22,27 @@
           If you've added your API key correctly, then this app is already tracking analytics!  Hit one of the buttons
           below to simulate some events.
         </p>
-        <button class="button button-block button-stable" ng-click="trackPurchase()">
+        <button class="button button-block button-dark" ng-click="trackPurchase()">
           Simulate a purchase
         </button>
-        <button class="button button-block button-stable" ng-click="trackReview()">
+        <button class="button button-block button-dark" ng-click="trackReview()">
           Simulate a review
         </button>
+      </div>
+    </div>
+    <div ng-if="queuedAnalytics" class="list card">
+      <div class="item item-avatar">
+        <img src="img/ionic-header.png">
+        <h2>Success!</h2>
+        <p>
+          Event queued!
+        </p>
+      </div>
+      <div class="item item-body">
+        <h2>
+          The event has been queued for sending to our analytics server.  Check your dashboard on apps.ionic.io in a
+          minute or two to see it!
+        </h2>
       </div>
     </div>
   </ion-content>

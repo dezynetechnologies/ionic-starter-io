@@ -65,7 +65,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AnalyticsCtrl', function($scope) {
+.controller('AnalyticsCtrl', function($scope, $ionicAnalytics) {
 
   // Track a fake purchase event.
   $scope.trackPurchase = function() {
@@ -73,6 +73,7 @@ angular.module('starter.controllers', [])
       item_id: 101,
       item_name: 'A-Trak player'
     });
+    $scope.queuedAnalytics = true;
   };
 
   // Track a fake review event
@@ -82,6 +83,7 @@ angular.module('starter.controllers', [])
       reviewer_name: 'John',
       content: 'Awesome app!'
     });
+    $scope.queuedAnalytics = true;
   };
 })
 
