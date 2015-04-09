@@ -1,7 +1,13 @@
 <ion-view view-title="Welcome">
   <ion-content class="padding">
     <div class="list card">
-      <div class="item item-divider">Ionic User</div>
+      <div class="item item-avatar">
+        <img src="img/ionic-header.png">
+        <h2>Ionic User</h2>
+        <p>
+          All your users, one place.
+        </p>
+      </div>
       <div class="item item-body">
         <p>
           Ionic User is the backbone on which all ionic.io services are built.  The service easily tracks all the
@@ -12,9 +18,25 @@
         <p>
           Click the button below to identify your first user!
         </p>
-        <button class="button button-block button-positive" ng-click="identifyUser()">
+        <button class="button button-block button-stable" ng-click="identifyUser()">
           Identify
         </button>
+        <div ng-if="identifiedUser">
+          <h2>User identified!</h2>
+        </div>
+      </div>
+    </div>
+    <div ng-if="identifiedUser" class="list card">
+      <div class="item item-avatar">
+        <img src="img/ionic-header.png">
+        <h2>Success!</h2>
+        <p>
+          User identified!
+        </p>
+      </div>
+      <div class="item item-body">
+        <h2>Name: <b>{{identifiedUser.name}}</b></h2>
+        <h2>ID: <b>{{identifiedUser.user_id}}</b></h2>
       </div>
     </div>
   </ion-content>

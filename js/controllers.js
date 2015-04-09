@@ -1,12 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($scope, $rootScope, $ionicPush, $ionicUser) {
-  /**
-   * Write your own code here to handle new device tokens from push notification registration as they come in.
-   **/
-  $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
-    console.log('Got token', data.token, data.platform);
-  });
+
 })
 
 .controller('UserCtrl', function($scope, $rootScope, $ionicUser) {
@@ -25,16 +20,26 @@ angular.module('starter.controllers', [])
 
     // Add some metadata to your user object.
     angular.extend(user, {
-      name: 'Test User',
+      name: 'Ionitron',
       message: 'I come from planet Ion'
     });
 
     // Identify your user with the Ionic User Service
-    $ionicUser.identify(user);
+    $ionicUser.identify(user).then(function(){
+      $scope.identifiedUser = user;
+    });
   };
 })
 
 .controller('PushCtrl', function($scope, $rootScope, $ionicPush) {
+  /**
+   * Write your own code here to handle new device tokens from push notification registration as they come in.
+   **/
+  $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
+    console.log('Got token', data.token, data.platform);
+    $scope.token = data.token;
+  });
+
   /**
    * Registers the currently identified Ionic User for push notifications on the current device. This should either pass
    * a user object to identify or be called after $ionicUser.identify()
@@ -61,7 +66,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AnalyticsCtrl', function($scope) {
-  
+
 })
 
 .controller('DeployCtrl', function($scope) {
