@@ -1,0 +1,24 @@
+<ion-view view-title="Welcome">
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-divider">Ionic Push</div>
+      <div class="item item-body">
+        <p>
+          Ionic Push makes it easy to add powerful push notifications to your app, with everything from a powerful
+          REST API and webhook integration to a simple GUI for targeted notifications across all Ionic platforms.  See
+          the docs <a href="http://docs.ionic.io/push/">here</a> for more info.
+        </p>
+        <p>
+          Click the button below to register this device for push notifications!
+        </p>
+        <button class="button button-block button-positive" ng-click="pushRegister()">
+          Register
+        </button>
+        <p>
+          <strong>Please note: </strong>You need to use a physical device for Ionic Push.  Ionic View,
+          <code>ionic serve</code>, and emulators won't cut it.
+        </p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
