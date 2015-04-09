@@ -1,5 +1,5 @@
 <ion-view view-title="Analytics">
-  <ion-content style="background: #aaa;" class="padding">
+  <ion-content style="background: #e8ebf1;" class="padding">
     <div class="list card">
       <div class="item item-avatar">
         <img src="img/analytics-pulse-header.png">
@@ -20,14 +20,12 @@
         </p>
         <p>
           If you've added your API key correctly, then this app is already tracking analytics!  Hit one of the buttons
-          below to simulate some events.
+          below to simulate some fake events.
         </p>
-        <button class="button button-block button-dark" ng-click="trackPurchase()">
-          Simulate a purchase
-        </button>
-        <button class="button button-block button-dark" ng-click="trackReview()">
-          Simulate a review
-        </button>
+        <div class="button-bar bar-dark">
+          <a class="button" ng-click="trackPurchase()">Purchase</a>
+          <a class="button" ng-click="trackReview()">Review</a>
+        </div>
       </div>
     </div>
     <div ng-if="queuedAnalytics" class="list card">
