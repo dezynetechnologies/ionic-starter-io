@@ -67,6 +67,22 @@ angular.module('starter.controllers', [])
 
 .controller('AnalyticsCtrl', function($scope) {
 
+  // Track a fake purchase event.
+  $scope.trackPurchase = function() {
+    $ionicAnalytics.track('purchase', {
+      item_id: 101,
+      item_name: 'A-Trak player'
+    });
+  };
+
+  // Track a fake review event
+  $scope.trackReview = function() {
+    $ionicAnalytics.track('review', {
+      star_rating: 5,
+      reviewer_name: 'John',
+      content: 'Awesome app!'
+    });
+  };
 })
 
 .controller('DeployCtrl', function($scope) {
