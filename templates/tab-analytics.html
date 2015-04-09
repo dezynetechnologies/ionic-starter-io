@@ -18,6 +18,16 @@
           events with various states in your app's routing (to generate heatmaps, for example). Check out the docs
           <a href="http://docs.ionic.io/analytics/">here</a>.
         </p>
+        <p>
+          If you've added your API key correctly, then this app is already tracking analytics!  Hit one of the buttons
+          below to simulate some events.
+        </p>
+        <button class="button button-block button-stable" ng-click="trackPurchase()">
+          Simulate a purchase
+        </button>
+        <button class="button button-block button-stable" ng-click="trackReview()">
+          Simulate a review
+        </button>
       </div>
     </div>
   </ion-content>
