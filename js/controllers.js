@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($scope, $rootScope, $ionicPush, $ionicUser) {
-
+  // Nothing to see here.
 })
 
 .controller('UserCtrl', function($scope, $rootScope, $ionicUser) {
@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
    * called before any other registrations take place.
    **/
   $scope.identifyUser = function() {
-    console.log('Identifying with Ionic User service');
+    console.log('Ionic User: Identifying with Ionic User service');
 
     var user = $ionicUser.get();
     if(!user.user_id) {
@@ -32,11 +32,9 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PushCtrl', function($scope, $rootScope, $ionicPush) {
-  /**
-   * Write your own code here to handle new device tokens from push notification registration as they come in.
-   **/
+  // Write your own code here to handle new device tokens from push notification registration as they come in.
   $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
-    console.log('Got token', data.token, data.platform);
+    console.log('Ionic Push: Got token ', data.token, data.platform);
     $scope.token = data.token;
   });
 
@@ -46,7 +44,7 @@ angular.module('starter.controllers', [])
    * (read the docs at http://docs.ionic.io/push/installation/).
    **/
   $scope.pushRegister = function() {
-    console.log('Registering user for Ionic Push');
+    console.log('Ionic Push: Registering user');
 
     // Register with the Ionic Push service.  All parameters are optional.
     $ionicPush.register({
@@ -69,6 +67,7 @@ angular.module('starter.controllers', [])
 
   // Track a fake purchase event.
   $scope.trackPurchase = function() {
+    console.log("Ionic Analytics: Tracking a fake purchase.");
     $ionicAnalytics.track('purchase', {
       item_id: 101,
       item_name: 'A-Trak player'
@@ -78,6 +77,7 @@ angular.module('starter.controllers', [])
 
   // Track a fake review event
   $scope.trackReview = function() {
+    console.log("Ionic Analytics: Tracking a fake review.");
     $ionicAnalytics.track('review', {
       star_rating: 5,
       reviewer_name: 'John',
@@ -88,5 +88,38 @@ angular.module('starter.controllers', [])
 })
 
 .controller('DeployCtrl', function($scope) {
+  $scope.updateMinutes = $rootScope.updateOptions.interval / 60 / 1000;
 
+  // Handle action when update is available
+  $rootScope.$on('$ionicDeploy:updateAvailable', function() {
+    console.log('Ionic Deploy: New update available!');
+    $scope.hasUpdate = true;
+  });
+
+  // Stop checking for updates form Ionic Deploy
+  $scope.stopCheckingForUpdates = function() {
+    $ionicDeploy.unwatch();
+  };
+
+  // Update app code with new release from Ionic Deploy
+  $scope.doUpdate = function() {
+    $ionicDeploy.update().then(function(res) {
+      console.log('Ionic Deploy: Update Success! ', res);
+    }, function(err) {
+      console.log('Ionic Deploy: Update error! ', err);
+    }, function(prog) {
+      console.log('Ionic Deploy: Progress... ', prog);
+    });
+  };
+
+  // Check Ionic Deploy for new code
+  $scope.checkForUpdates = function() {
+    console.log('Ionic Deploy: Checking for updates');
+    $ionicDeploy.check().then(function(hasUpdate) {
+      $rootScope.lastChecked = new Date();
+      $scope.hasUpdate = hasUpdate;
+    }, function(err) {
+      console.error('Ionic Deploy: Unable to check for updates: ', err);
+    });
+  }
 });

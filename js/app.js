@@ -15,7 +15,6 @@ angular.module('starter', [
   'starter.services'
 ])
 
-// Identify App
 .config(['$ionicAppProvider', function($ionicAppProvider) {
   // Identify app
   $ionicAppProvider.identify({
@@ -32,15 +31,28 @@ angular.module('starter', [
 
 .run(function($ionicPlatform, $cordovaStatusbar) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
+    // Hide the accessory bar by default
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
+
+    // Color the iOS status bar text to white
     if (window.StatusBar) {
       $cordovaStatusbar.overlaysWebView(true);
       $cordovaStatusBar.style(1); //Light
     }
+
+    // Default update checking
+    $rootScope.updateOptions = {
+      interval: 2 * 60 * 1000
+    }
+
+    // Watch Ionic Deploy service for new code
+    $ionicDeploy.watch($rootScope.updateOptions).then(function() {}, function() {}, function(hasUpdate) {
+      $rootScope.lastChecked = new Date();
+      console.log('WATCH RESULT', hasUpdate);
+    }
+);
   });
 })
 
@@ -61,6 +73,7 @@ angular.module('starter', [
 
   // Each tab has its own nav history stack:
 
+  // Welcome tab
   .state('tab.home', {
     url: '/home',
     views: {
@@ -71,6 +84,7 @@ angular.module('starter', [
     }
   })
 
+  // Ionic User tab
   .state('tab.user', {
     url: '/user',
     views: {
@@ -81,6 +95,7 @@ angular.module('starter', [
     }
   })
 
+  // Ionic Push tab
   .state('tab.push', {
     url: '/push',
     views: {
@@ -91,6 +106,7 @@ angular.module('starter', [
     }
   })
 
+  // Ionic Deploy tab
   .state('tab.deploy', {
     url: '/deploy',
     views: {
@@ -101,6 +117,7 @@ angular.module('starter', [
     }
   })
 
+  // Ionic Analytics tab
   .state('tab.analytics', {
     url: '/analytics',
     views: {
