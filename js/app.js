@@ -10,6 +10,7 @@ angular.module('starter', [
   'ngCordova',
   'ionic.service.core',
   'ionic.service.push',
+  'ionic.service.deploy',
   'ionic.service.analytics',
   'starter.controllers',
   'starter.services'
@@ -29,7 +30,7 @@ angular.module('starter', [
   });
 }])
 
-.run(function($ionicPlatform, $cordovaStatusbar) {
+.run(function($rootScope, $ionicDeploy, $ionicPlatform, $cordovaStatusbar) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -45,14 +46,13 @@ angular.module('starter', [
     // Default update checking
     $rootScope.updateOptions = {
       interval: 2 * 60 * 1000
-    }
+    };
 
     // Watch Ionic Deploy service for new code
     $ionicDeploy.watch($rootScope.updateOptions).then(function() {}, function() {}, function(hasUpdate) {
       $rootScope.lastChecked = new Date();
       console.log('WATCH RESULT', hasUpdate);
-    }
-);
+    });
   });
 })
 

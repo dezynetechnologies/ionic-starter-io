@@ -26,14 +26,18 @@ angular.module('starter.controllers', [])
 
     // Identify your user with the Ionic User Service
     $ionicUser.identify(user).then(function(){
-      $scope.identifiedUser = user;
+      alert('Successfully identified user ' + user.name + '\n ID ' + user.user_id);
     });
   };
 })
 
-.controller('PushCtrl', function($scope, $rootScope, $ionicPush) {
+.controller('PushCtrl', function($http, $scope, $rootScope, $ionicPush, $ionicApp) {
+  // Put your private API key here to be able to send push notifications from within the app.
+  $scope.privateKey = 'a0592ccd5f1f64d8a6de0eee8e3367af3ef16361ba8ca2dd';
+
   // Write your own code here to handle new device tokens from push notification registration as they come in.
   $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
+    alert("Successfully registered token " + data.token);
     console.log('Ionic Push: Got token ', data.token, data.platform);
     $scope.token = data.token;
   });
@@ -54,12 +58,45 @@ angular.module('starter.controllers', [])
       canRunActionsOnWake: true, // Whether to run auto actions outside the app,
       onNotification: function(notification) {
         // Handle new push notifications here
+        console.log(notification);
         return true;
       }
     }).then(function(deviceToken) {
       //Save the device token, if necessary
-      $scope.token = deviceToken;
     });
+  };
+
+  $scope.sendPush = function() {
+    if ($scope.privateKey) {
+      alert('A notification will be sent to you 5 seconds after you close this alert.  They can take a few minutes to arrive.');
+      var appId = $ionicApp.getApp().app_id;
+      var auth = btoa($scope.privateKey + ':');
+      var req = {
+        method: 'POST',
+        url: 'https://push.ionic.io/api/v1/push',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Ionic-Application-Id': appId,
+          'Authorization': 'basic ' + auth
+        },
+        data: {
+          "tokens": [$scope.token],
+          "notification": {
+            "alert":"Hello World!"
+          }
+        }
+      };
+
+      setTimeout(function(){
+        $http(req).success(function(resp){
+            console.log("Ionic Push: Push success!");
+          }).error(function(error){
+            console.log("Ionic Push: Push error...");
+          });
+      }, 5000);
+    } else {
+      alert('Uh-oh!  To use this function, add your Private API Key to line 36 of controllers.js');
+    }
   };
 })
 
@@ -72,7 +109,7 @@ angular.module('starter.controllers', [])
       item_id: 101,
       item_name: 'A-Trak player'
     });
-    $scope.queuedAnalytics = true;
+    alert('Tracked purchase of A_Trak player ID 101.');
   };
 
   // Track a fake review event
@@ -83,12 +120,12 @@ angular.module('starter.controllers', [])
       reviewer_name: 'John',
       content: 'Awesome app!'
     });
-    $scope.queuedAnalytics = true;
+    alert('Tracked 5-star review from John, "Awesome app!"');
   };
 })
 
-.controller('DeployCtrl', function($scope) {
-  $scope.updateMinutes = $rootScope.updateOptions.interval / 60 / 1000;
+.controller('DeployCtrl', function($scope, $rootScope, $ionicDeploy) {
+  $scope.updateMinutes = 2;
 
   // Handle action when update is available
   $rootScope.$on('$ionicDeploy:updateAvailable', function() {
@@ -116,6 +153,7 @@ angular.module('starter.controllers', [])
   $scope.checkForUpdates = function() {
     console.log('Ionic Deploy: Checking for updates');
     $ionicDeploy.check().then(function(hasUpdate) {
+      console.log('Ionic Deploy: Update available: ' + hasUpdate);
       $rootScope.lastChecked = new Date();
       $scope.hasUpdate = hasUpdate;
     }, function(err) {

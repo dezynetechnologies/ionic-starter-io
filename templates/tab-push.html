@@ -25,18 +25,9 @@
         <button class="button button-block button-dark" ng-click="pushRegister()">
           Register
         </button>
-      </div>
-    </div>
-    <div ng-if="token" class="list card">
-      <div class="item item-avatar">
-        <img src="img/ionic-header.png">
-        <h2>Success!</h2>
-        <p>
-          Registered for push!
-        </p>
-      </div>
-      <div class="item item-body">
-        <h2>Token: <b>{{token}}</b></h2>
+        <button class="button button-block button-stable" ng-if="token" ng-click="sendPush()">
+          Send Notification
+        </button>
       </div>
     </div>
   </ion-content>
