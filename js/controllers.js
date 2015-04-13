@@ -33,6 +33,7 @@ angular.module('starter.controllers', [])
 
 .controller('PushCtrl', function($http, $scope, $rootScope, $ionicPush, $ionicApp) {
   // Put your private API key here to be able to send push notifications from within the app.
+  // TODO: Add your private API key here if you want to push from your device.
   $scope.privateKey = 'YOUR_PRIVATE_API_KEY';
 
   // Write your own code here to handle new device tokens from push notification registration as they come in.
@@ -66,11 +67,16 @@ angular.module('starter.controllers', [])
     });
   };
 
+  /**
+   * If you've added your Private API Key, you can send a push notification directly fro the current device.  Since the
+   * app iwll be open when this happens, you probably will not see the notification handled by the OS, but it should
+   * still be handled by whatever function you define.
+   **/
   $scope.sendPush = function() {
     if ($scope.privateKey) {
       alert('A notification will be sent to you 5 seconds after you close this alert.  They can take a few minutes to arrive.');
       var appId = $ionicApp.getApp().app_id;
-      var auth = btoa($scope.privateKey + ':');
+      var auth = btoa($scope.privateKey + ':'); // Base64 encode your key
       var req = {
         method: 'POST',
         url: 'https://push.ionic.io/api/v1/push',

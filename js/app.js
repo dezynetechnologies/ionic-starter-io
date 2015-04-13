@@ -22,9 +22,8 @@ angular.module('starter', [
     // The App ID (from apps.ionic.io) for the server
     app_id: 'YOUR_APP_ID',
     // The public API key all services will use for this app
-    api_key: 'YOUR_PIBLIC_API_KEY',
-    // TODO: Deal with all these keys, Batman!  This is a hold-over from analytics that isn't going to be here for
-    // long... I think...
+    api_key: 'YOUR_PUBLIC_API_KEY',
+    // The write key your app will use for analytics
     api_write_key: 'YOUR_WRITE_KEY',
     // The GCM project ID (project number) from your Google Developer Console (un-comment if used)
     // gcm_id: 'YOUR_GCM_ID'
