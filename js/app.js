@@ -12,8 +12,7 @@ angular.module('starter', [
   'ionic.service.push',
   'ionic.service.deploy',
   'ionic.service.analytics',
-  'starter.controllers',
-  'starter.services'
+  'starter.controllers'
 ])
 
 .config(['$ionicAppProvider', function($ionicAppProvider) {
