@@ -19,13 +19,15 @@ angular.module('starter', [
   // Identify app
   $ionicAppProvider.identify({
     // The App ID (from apps.ionic.io) for the server
-    app_id: 'YOUR_APP_ID',
+    app_id: '910e702a',
     // The public API key all services will use for this app
-    api_key: 'YOUR_PUBLIC_API_KEY',
+    api_key: '96427b01d3a97e5f256cd3226d265e7884d33efd6e268385',
     // The write key your app will use for analytics
-    api_write_key: 'YOUR_WRITE_KEY',
+    api_write_key: 'f20677c257a5db6c0776a92541e2a7650ddd008ee0fc72d9fc46596c35e78df9c1b0b2dcab14761d5e3c4cb9b6092b59a1c1c946a531d75f0f16b63c540a19f5f763fda639ca3673c688773b81af321facb94eb385eca99e99da307e08152f3aa94903312b0ba742cfa3e8a2c76441bc8ac95555531106253cc370360eaa01c213e2a421506afe0b8387aacb89ce5336',
     // The GCM project ID (project number) from your Google Developer Console (un-comment if used)
-    // gcm_id: 'YOUR_GCM_ID'
+    gcm_id: '458002019577',
+    // If true, will attempt to send pushes through the developer gateway instead of GCM/APNS
+    dev_push: true
   });
 }])
 
