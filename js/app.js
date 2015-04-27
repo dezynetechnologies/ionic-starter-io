@@ -19,15 +19,15 @@ angular.module('starter', [
   // Identify app
   $ionicAppProvider.identify({
     // The App ID (from apps.ionic.io) for the server
-    app_id: '910e702a',
+    app_id: '54317616',
     // The public API key all services will use for this app
-    api_key: '96427b01d3a97e5f256cd3226d265e7884d33efd6e268385',
+    api_key: '4177f5eda12aa203f540a4da49cbb0db8deca9b145cf1e73',
     // The write key your app will use for analytics
-    api_write_key: 'f20677c257a5db6c0776a92541e2a7650ddd008ee0fc72d9fc46596c35e78df9c1b0b2dcab14761d5e3c4cb9b6092b59a1c1c946a531d75f0f16b63c540a19f5f763fda639ca3673c688773b81af321facb94eb385eca99e99da307e08152f3aa94903312b0ba742cfa3e8a2c76441bc8ac95555531106253cc370360eaa01c213e2a421506afe0b8387aacb89ce5336',
+    api_write_key: '06d1ca047b5ce1d8acbeac7a8b7f44eb2ebc4568df25f495172868ea073fadad25ffa5880fbd5ab60f71fbb8e45e4b99c49ea4661d35e2177c0161b576c6fbea5123ae1ffef8d36ddbb30d618f2fb28cafae8430466438d39fa5a520e8578c629a557107b00ce8b1e306d1e459a60ad56340956ad19a6f791571636b815b2c2022f422cdb1a628dd7bc58232be2aa26b',
     // The GCM project ID (project number) from your Google Developer Console (un-comment if used)
     gcm_id: '458002019577',
     // If true, will attempt to send pushes through the developer gateway instead of GCM/APNS
-    dev_push: true
+    dev_push: false
   });
 }])
 
@@ -36,6 +36,13 @@ angular.module('starter', [
     // Hide the accessory bar by default
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+
+    if (window.cordova) {
+      // Ensure latest update is loaded
+      $ionicDeploy.load();
+    } else {
+      console.log("LOL TRY HARDER");
     }
 
     // Color the iOS status bar text to white
