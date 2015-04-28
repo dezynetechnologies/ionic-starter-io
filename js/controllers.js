@@ -34,7 +34,7 @@ angular.module('starter.controllers', [])
 .controller('PushCtrl', function($http, $scope, $rootScope, $ionicPush, $ionicApp) {
   // Put your private API key here to be able to send push notifications from within the app.
   // TODO: Add your private API key here if you want to push from your device.
-  $scope.privateKey = 'YOUR_PRIVATE_API_KEY';
+  $scope.privateKey = '';
 
   // Write your own code here to handle new device tokens from push notification registration as they come in.
   $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
       var auth = btoa($scope.privateKey + ':'); // Base64 encode your key
       var req = {
         method: 'POST',
-        url: 'https://push.ionic.io/api/v1/push',
+        url: 'http://localhost:4730/api/v1/push',
         headers: {
           'Content-Type': 'application/json',
           'X-Ionic-Application-Id': appId,
