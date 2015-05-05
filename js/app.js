@@ -11,7 +11,6 @@ angular.module('starter', [
   'ionic.service.core',
   'ionic.service.push',
   'ionic.service.deploy',
-  'ionic.service.analytics',
   'starter.controllers'
 ])
 
@@ -19,30 +18,21 @@ angular.module('starter', [
   // Identify app
   $ionicAppProvider.identify({
     // The App ID (from apps.ionic.io) for the server
-    app_id: '54317616',
+    app_id: 'YOUR_APP_ID',
     // The public API key all services will use for this app
-    api_key: '4177f5eda12aa203f540a4da49cbb0db8deca9b145cf1e73',
-    // The write key your app will use for analytics
-    api_write_key: '06d1ca047b5ce1d8acbeac7a8b7f44eb2ebc4568df25f495172868ea073fadad25ffa5880fbd5ab60f71fbb8e45e4b99c49ea4661d35e2177c0161b576c6fbea5123ae1ffef8d36ddbb30d618f2fb28cafae8430466438d39fa5a520e8578c629a557107b00ce8b1e306d1e459a60ad56340956ad19a6f791571636b815b2c2022f422cdb1a628dd7bc58232be2aa26b',
+    api_key: 'YOUR_PUBLIC_KEY',
     // The GCM project ID (project number) from your Google Developer Console (un-comment if used)
-    gcm_id: 'GCM_ID',
-    // If true, will attempt to send pushes through the developer gateway instead of GCM/APNS
-    dev_push: true
+    //gcm_id: 'GCM_ID',
   });
 }])
 
 .run(function($rootScope, $ionicDeploy, $ionicPlatform, $cordovaStatusbar) {
+
   $ionicPlatform.ready(function() {
+
     // Hide the accessory bar by default
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-
-    // Load latest Ionic Deploy release
-    if (window.cordova) {
-      $ionicDeploy.load();
-    } else {
-      console.log("Not on device, Ionic Deploy unsupported.");
     }
 
     // Color the iOS status bar text to white
