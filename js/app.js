@@ -22,7 +22,7 @@ angular.module('starter', [
     // The public API key all services will use for this app
     api_key: 'YOUR_PUBLIC_KEY',
     // The GCM project ID (project number) from your Google Developer Console (un-comment if used)
-    //gcm_id: 'GCM_ID',
+    // gcm_id: 'GCM_ID'
   });
 }])
 
@@ -63,7 +63,7 @@ angular.module('starter', [
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
+  .state('tab', {
     url: "/tab",
     abstract: true,
     templateUrl: "templates/tabs.html"
