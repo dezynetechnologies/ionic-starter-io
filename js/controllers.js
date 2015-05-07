@@ -34,7 +34,7 @@ angular.module('starter.controllers', [])
 .controller('PushCtrl', function($http, $scope, $rootScope, $ionicPush, $ionicApp) {
   // Put your private API key here to be able to send push notifications from within the app.
   // TODO: Add your private API key here if you want to push from your device.
-  $scope.privateKey = 'YOUR_PRIVATE_API_KEY';
+  $scope.privateKey = '';
 
   // Write your own code here to handle new device tokens from push notification registration as they come in.
   $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
@@ -59,7 +59,7 @@ angular.module('starter.controllers', [])
       canRunActionsOnWake: true, // Whether to run auto actions outside the app,
       onNotification: function(notification) {
         // Handle new push notifications here
-        console.log(notification);
+        // console.log(notification);
         return true;
       }
     }).then(function(deviceToken) {
@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
       var auth = btoa($scope.privateKey + ':'); // Base64 encode your key
       var req = {
         method: 'POST',
-        url: 'https://push.ionic.io/api/v1/push',
+        url: $ionicApp.getValue('push_api_server') + '/api/v1/push',
         headers: {
           'Content-Type': 'application/json',
           'X-Ionic-Application-Id': appId,
@@ -163,7 +163,7 @@ angular.module('starter.controllers', [])
       $rootScope.lastChecked = new Date();
       $scope.hasUpdate = hasUpdate;
     }, function(err) {
-      console.error('Ionic Deploy: Unable to check for updates: ', err);
+      console.error('Ionic Deploy: Unable to check for updates', err);
     });
   }
 });
